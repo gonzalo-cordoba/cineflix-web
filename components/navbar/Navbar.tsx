@@ -1,4 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
+import logo from "../../public/logo.webp";
+import { PersonIcon } from "@primer/octicons-react";
 
 const navItems = [
   { path: "/movies", text: "Peliculas" },
@@ -8,18 +11,25 @@ const navItems = [
 
 export const Navbar = () => {
   return (
-    <nav className="flex bg-violet-600 bg-opacity-30 p-2 m-2 rounded">
-      <Link href={"/"} className="flex items-center">
-        <span>Icon Cineflix</span>
+    <nav className="flex items-center justify-between bg-[#9667E0] p-5 rounded">
+      <div className="flex space-x-4">
+        {navItems.map((navItems) => (
+          <Link key={navItems.path} href={navItems.path}>
+            {navItems.text}
+          </Link>
+        ))}
+      </div>
+
+      <div className="flex-1"></div>
+
+      <Link href={"/"} className="absolute left-1/2 transform -translate-x-1/2">
+        <Image src={logo} alt="logo-cineflix" width={60} height={60} priority />
       </Link>
 
-      <div className="flex flex-1"></div>
-
-      {navItems.map((navItems) => (
-        <Link key={navItems.path} className="mr-2" href={navItems.path}>
-          {navItems.text}
-        </Link>
-      ))}
+      <div className="flex-1"></div>
+      <Link href="/login">
+        <PersonIcon size={24} />
+      </Link>
     </nav>
   );
 };
