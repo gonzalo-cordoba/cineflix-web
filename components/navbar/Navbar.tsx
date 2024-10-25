@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.webp";
 import { PersonIcon } from "@primer/octicons-react";
+import { ActiveLink } from "../active-link/ActiveLink";
 
 const navItems = [
   { path: "/movies", text: "Peliculas" },
@@ -14,9 +15,7 @@ export const Navbar = () => {
     <nav className="flex items-center justify-between bg-[#9667E0] p-5 rounded">
       <div className="flex space-x-4">
         {navItems.map((navItems) => (
-          <Link key={navItems.path} href={navItems.path}>
-            {navItems.text}
-          </Link>
+          <ActiveLink key={navItems.path} {...navItems} />
         ))}
       </div>
 
