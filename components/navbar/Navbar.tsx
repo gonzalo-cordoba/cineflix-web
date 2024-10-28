@@ -12,7 +12,7 @@ const navItems = [
 const Navbar = () => {
   return (
     <nav className="flex items-center justify-between bg-[#9667E0] p-5 rounded">
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 text-white">
         {navItems.map((navItems) => (
           <ActiveLink key={navItems.path} {...navItems} />
         ))}
@@ -26,7 +26,7 @@ const Navbar = () => {
 
       <div className="flex-1"></div>
       <Link href="/login">
-        <PersonIcon size={24} />
+        <PersonIcon className="text-white" size={24} />
       </Link>
     </nav>
   );

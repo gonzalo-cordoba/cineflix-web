@@ -38,7 +38,13 @@ export default async function MoviesPage() {
 
   return (
     <div className="flex flex-col">
-      <span className="text-5xl my-2">Listado de peliculas</span>
+      <h1 className="text-3xl font-medium text-center mb-4 mt-4">
+        Películas en Cartelera
+      </h1>
+      <p className="text-base text-center text-gray-500">
+        Explora los últimos estrenos y disfruta de una experiencia
+        cinematográfica única.
+      </p>
 
       <MovieGrid movies={movies} />
     </div>
