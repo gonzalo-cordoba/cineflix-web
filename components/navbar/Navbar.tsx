@@ -9,8 +9,7 @@ const navItems = [
   { path: "/candy", text: "Candy" },
   { path: "/contact", text: "Contacto" },
 ];
-
-export const Navbar = () => {
+const Navbar = () => {
   return (
     <nav className="flex items-center justify-between bg-[#9667E0] p-5 rounded">
       <div className="flex space-x-4">
@@ -32,3 +31,5 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+export default Navbar;
