@@ -77,8 +77,8 @@ export default function CineBanner() {
               <Image
                 src={item.poster}
                 alt={item.movieTitle}
-                layout="fill"
-                objectFit="contain"
+                fill
+                style={{ objectFit: "contain" }}
                 priority
               />
               <div className="absolute bottom-4 left-4 right-4">

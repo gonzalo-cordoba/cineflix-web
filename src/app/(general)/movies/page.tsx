@@ -6,14 +6,10 @@ import {
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-console.log(API_KEY);
-
 const getMovies = async (page = 1, search = ""): Promise<MovieResult[]> => {
   const data: MoviesResponse = await fetch(
     `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&page=${page}&language=es-AR`
   ).then((res) => res.json());
-
-  console.log(data);
 
   if (!data.results) {
     console.error("Error: la respuesta de la api no contiene results");
