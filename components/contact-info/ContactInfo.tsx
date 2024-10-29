@@ -26,7 +26,7 @@ export default function ContactInfo() {
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             ></path>
           </svg>
-          <span>Av. del Cine 123, Ciudad Película</span>
+          <span>Avenida Santa Fe 3253, Ciudad Autonoma de Buenos Aires</span>
         </li>
         <li className="flex items-start">
           <svg
@@ -60,14 +60,14 @@ export default function ContactInfo() {
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             ></path>
           </svg>
-          <span>info@cinemágico.com</span>
+          <span>info@cineflix.com</span>
         </li>
       </ul>
       <div className="mt-8">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">
           Horario de Atención
         </h3>
-        <p className="text-gray-600">Lunes a Domingo: 10:00 AM - 10:00 PM</p>
+        <p className="text-gray-600">Lunes a Domingo: 15:00 PM - 01:00 AM</p>
       </div>
     </div>
   );
