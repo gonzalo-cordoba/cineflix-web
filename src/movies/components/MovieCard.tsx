@@ -11,14 +11,16 @@ export const MovieCard = ({ movie }: Props) => {
 
   return (
     <div className="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg h-full transition-transform duration-300 hover:scale-105">
-      <div className="relative aspect-[2/3]">
+      <div className="relative aspect-[2/3] w-full">
         <Image
           src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-          layout="fill"
-          objectFit="cover"
           alt={title}
+          fill
+          className="object-cover rounded-lg"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={false}
         />
+
         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-70">
           <Link
             href="/choicetickets"
