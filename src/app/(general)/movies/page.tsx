@@ -34,7 +34,7 @@ export default async function MoviesPage() {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-3xl font-medium text-center mb-4 mt-4">
+      <h1 className="text-4xl font-bold text-center text-gray-900 mb-5 mt-5">
         Películas en Cartelera
       </h1>
       <p className="text-base text-center text-gray-500">
