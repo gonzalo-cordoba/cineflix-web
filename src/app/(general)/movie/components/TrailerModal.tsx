@@ -49,7 +49,7 @@ export default function TrailerModal({ movieId }: TrailerModalProps) {
     <>
       <button
         onClick={handleTrailerClick}
-        className="border-white text-white hover:bg-white hover:text-black flex items-center"
+        className="px-4 py-2 border border-white text-white hover:bg-white hover:text-black transition-colors duration-300 rounded-full flex items-center space-x-2"
       >
         <Play className="w-4 h-4 mr-2" />
         Ver trailer
