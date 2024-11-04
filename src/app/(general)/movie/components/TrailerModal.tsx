@@ -12,7 +12,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const getTrailer = async (id: string): Promise<string | null> => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=es-AR`
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
     );
     const data = await response.json();
 
