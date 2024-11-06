@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-
-import logo from "../../../public/logo.webp";
-
-import Image from "next/image";
-import WelcomeCard from "@/components/login/WelcomeCard";
-import AuthOptions from "@/components/login/AuthOptions";
+import { WelcomeCard, AuthOptions } from "@/components/login";
 
 export const metadata: Metadata = {
   title: "Iniciar Sesión o Crear Cuenta - CineFlix",

@@ -1,4 +1,4 @@
-export * from "./AuthOptions";
-export * from "./CreateAccountButton";
-export * from "./LoginButton";
-export * from "./WelcomeCard";
+export { default as AuthOptions } from "./AuthOptions";
+export { default as CreateAccountButton } from "./CreateAccountButton";
+export { default as LoginButton } from "./LoginButton";
+export { default as WelcomeCard } from "./WelcomeCard";
