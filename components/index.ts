@@ -6,3 +6,6 @@ export * from "./map-embed/MapEmbed";
 
 export * from "./ui/button-violet/ButtonViolet";
 export * from "./ui/footer/Footer";
+
+// Componentes seccion login
+export * from "./login";
