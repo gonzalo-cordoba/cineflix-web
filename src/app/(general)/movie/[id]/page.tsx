@@ -17,11 +17,13 @@ const getMovie = async (id: string) => {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const { id, title } = await getMovie(params.id);
+    const { id } = await params;
+    const movieId = id;
+    const movie = await getMovie(movieId);
 
     return {
-      title: `${title}`,
-      description: `Pagina de ${title}`,
+      title: movie.title,
+      description: `Pagina de ${movie.title}`,
     };
   } catch (error) {
     return {
@@ -32,7 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function MoviePage({ params }: Props) {
-  const movie = await getMovie(params.id);
+  const { id } = await params;
+  const movieId = id;
+  const movie = await getMovie(movieId);
   const backgroundUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
   return (
     <div
@@ -45,7 +49,7 @@ export default async function MoviePage({ params }: Props) {
       }}
     >
       <div className="absolute inset-0 backdrop-blur-sm bg-black/30 -z-10" />
-      <MovieContent movieId={params.id} />
+      <MovieContent movieId={movieId} />
     </div>
   );
 }
