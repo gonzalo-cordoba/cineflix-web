@@ -6,7 +6,6 @@ export default function RegisterOptions() {
     <div className="p-8 flex flex-col justify-center items-center max-w-md mx-auto w-full gap-6">
       <div className="text-center space-y-4 w-full">
         <h2 className="text-2xl font-medium text-gray-900">Crea tu cuenta</h2>
-        {/* //! Recordar implementar que al rellenar el campo con el correo electronico me mande un 'codigo' numerico para iniciar sesion */}
         <FormRegister />
       </div>
 

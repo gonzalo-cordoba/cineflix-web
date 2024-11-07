@@ -3,6 +3,7 @@ import Link from "next/link";
 interface Props {
   text: string;
   href?: string;
+  type?: string;
 }
 
 export default function LoginButton({ text, href = "/" }: Props) {
