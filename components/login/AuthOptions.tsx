@@ -8,7 +8,7 @@ export default function AuthOptions() {
         <h2 className="text-2xl font-medium text-gray-900 mb-2">
           ¿Ya tienes una cuenta?
         </h2>
-        <LoginButton href="/loginacount" text="Inicia sesion" />
+        <LoginButton href="/login-account" text="Inicia sesion" />
       </div>
 
       <div className="text-center text-sm text-gray-600">
@@ -19,7 +19,7 @@ export default function AuthOptions() {
 
       <div className="text-center text-sm text-gray-600 mt-4">
         Si ya tienes una cuenta{" "}
-        <Link href="/loginacount" className="text-[#9667E0] hover:underline">
+        <Link href="/login-account" className="text-[#9667E0] hover:underline">
           Inicia sesión
         </Link>
       </div>
