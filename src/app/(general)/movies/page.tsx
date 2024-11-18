@@ -3,6 +3,7 @@ import {
   MovieResult,
   MoviesResponse,
 } from "../../../movies/interfaces/movies.response";
+import * as motion from "framer-motion/client";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -34,13 +35,23 @@ export default async function MoviesPage() {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-4xl font-bold text-center text-gray-900 mb-5 mt-5">
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-4xl font-bold text-center text-gray-900 mb-5 mt-5"
+      >
         Películas en Cartelera
-      </h1>
-      <p className="text-base text-center text-gray-500">
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="text-base text-center text-gray-500"
+      >
         Explora los últimos estrenos y disfruta de una experiencia
         cinematográfica única.
-      </p>
+      </motion.p>
 
       <MovieGrid movies={movies} />
     </div>

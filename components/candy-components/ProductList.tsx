@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import * as motion from "framer-motion/client";
+import { cardVariants } from "@/src/movies/components/MovieGrid";
 
 export default function ProductList() {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
@@ -50,13 +52,25 @@ export default function ProductList() {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.1,
+          },
+        },
+      }}
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12"
+    >
       {candyItems.map((item, index) => (
-        <div
+        <motion.div
           key={index}
           className="relative group"
           onMouseEnter={() => setHoveredItem(index)}
           onMouseLeave={() => setHoveredItem(null)}
+          variants={cardVariants}
         >
           <div className="aspect-square overflow-hidden rounded-lg shadow-sm transition-shadow duration-300 group-hover:shadow-md">
             <Image
@@ -81,8 +95,8 @@ export default function ProductList() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

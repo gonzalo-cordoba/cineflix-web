@@ -1,27 +1,45 @@
 import Link from "next/link";
 import { GoogleButton } from "../register";
 import FormLoginAccount from "./FormLoginAccount";
+import * as motion from "framer-motion/client";
+import {
+  containerVariantsOptions,
+  itemVariantsOptions,
+} from "./animationsVariants";
 
 export default function LoginAccountOptions() {
   return (
-    <div className="p-8 flex flex-col justify-center items-center max-w-md mx-auto w-full gap-6">
-      <div className="text-center space-y-4 w-full">
+    <motion.div
+      className="p-8 flex flex-col justify-center items-center max-w-md mx-auto w-full gap-6"
+      variants={containerVariantsOptions}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div
+        className="text-center space-y-4 w-full"
+        variants={itemVariantsOptions}
+      >
         <FormLoginAccount />
-      </div>
+      </motion.div>
 
-      <div className="text-center text-sm text-gray-600">
+      <motion.div
+        className="text-center text-sm text-gray-600"
+        variants={itemVariantsOptions}
+      >
         O crea una cuenta con tus redes sociales
-      </div>
+      </motion.div>
 
-      {/* TODO: Recordar implementar autenticacion con Google con Auth.js */}
       <GoogleButton text="Continuar con Google" />
 
-      <div className="text-center text-sm text-gray-600 mt-4">
+      <motion.div
+        className="text-center text-sm text-gray-600 mt-4"
+        variants={itemVariantsOptions}
+      >
         ¿No tienes cuenta aún?{" "}
         <Link href="/register" className="text-[#9667E0] hover:underline">
           Registrate
         </Link>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

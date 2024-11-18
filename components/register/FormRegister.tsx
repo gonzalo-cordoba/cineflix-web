@@ -1,6 +1,13 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import * as motion from "framer-motion/client";
+import { AnimatePresence } from "framer-motion";
+import {
+  buttonVariantsForm,
+  errorVariantsForm,
+  inputVariantsForm,
+} from "./animationVariants";
 
 interface FormValues {
   email: string;
@@ -22,9 +29,22 @@ export default function FormRegister() {
   const password = watch("password");
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <input
+    <motion.form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.1,
+          },
+        },
+      }}
+    >
+      <motion.div variants={inputVariantsForm}>
+        <motion.input
           id="username"
           type="text"
           {...register("username", {
@@ -32,13 +52,25 @@ export default function FormRegister() {
           })}
           placeholder="Nombre completo"
           className="border w-full rounded-full py-6 px-4 border-[#9667E0] focus:ring-[#9667E0] focus:border-[#9667E0]"
+          whileFocus={{ scale: 1.02 }}
         />
-        {errors.username && (
-          <p className="text-red-500">{errors.username.message}</p>
-        )}
-      </div>
-      <div>
-        <input
+        <AnimatePresence>
+          {errors.username && (
+            <motion.p
+              className="text-red-500"
+              variants={errorVariantsForm}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              {errors.username.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      <motion.div variants={inputVariantsForm}>
+        <motion.input
           id="email"
           type="email"
           {...register("email", {
@@ -50,12 +82,25 @@ export default function FormRegister() {
           })}
           placeholder="correo@ejemplo.com"
           className="border w-full rounded-full py-6 px-4 border-[#9667E0] focus:ring-[#9667E0] focus:border-[#9667E0]"
+          whileFocus={{ scale: 1.02 }}
         />
-        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
-      </div>
+        <AnimatePresence>
+          {errors.email && (
+            <motion.p
+              className="text-red-500"
+              variants={errorVariantsForm}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              {errors.email.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
-      <div>
-        <input
+      <motion.div variants={inputVariantsForm}>
+        <motion.input
           id="password"
           type="password"
           {...register("password", {
@@ -67,14 +112,25 @@ export default function FormRegister() {
           })}
           placeholder="Contraseña"
           className="border w-full rounded-full py-6 px-4 border-[#9667E0] focus:ring-[#9667E0] focus:border-[#9667E0]"
+          whileFocus={{ scale: 1.02 }}
         />
-        {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
-        )}
-      </div>
+        <AnimatePresence>
+          {errors.password && (
+            <motion.p
+              className="text-red-500"
+              variants={errorVariantsForm}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              {errors.password.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
-      <div>
-        <input
+      <motion.div variants={inputVariantsForm}>
+        <motion.input
           id="confirmPassword"
           type="password"
           {...register("confirmPassword", {
@@ -84,18 +140,32 @@ export default function FormRegister() {
           })}
           placeholder="Confirmar contraseña"
           className="border w-full rounded-full py-6 px-4 border-[#9667E0] focus:ring-[#9667E0] focus:border-[#9667E0]"
+          whileFocus={{ scale: 1.02 }}
         />
-        {errors.confirmPassword && (
-          <p className="text-red-500">{errors.confirmPassword.message}</p>
-        )}
-      </div>
+        <AnimatePresence>
+          {errors.confirmPassword && (
+            <motion.p
+              className="text-red-500"
+              variants={errorVariantsForm}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              {errors.confirmPassword.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
-      <button
+      <motion.button
         type="submit"
         className="block w-full bg-[#9667E0] hover:bg-[#8557c9] text-white rounded-full py-6 mt-5"
+        variants={buttonVariantsForm}
+        whileHover="hover"
+        whileTap="tap"
       >
         Crear cuenta
-      </button>
-    </form>
+      </motion.button>
+    </motion.form>
   );
 }

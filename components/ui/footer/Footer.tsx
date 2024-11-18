@@ -1,11 +1,17 @@
 import { ContactItem, FooterLink, SocialLink } from "./components";
+import * as motion from "framer-motion/client";
 
 export default function Footer() {
   const quickLinks = ["Inicio", "Peliculas", "Candy", "Contacto"];
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-100 text-gray-600 py-12 px-4 md:px-6 lg:px-8">
+    <motion.footer
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="bg-gray-100 text-gray-600 py-12 px-4 md:px-6 lg:px-8"
+    >
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div className="space-y-4">
           <div className="font-bold text-2xl text-[#9667E0]">Cineflix</div>
@@ -158,6 +164,6 @@ export default function Footer() {
       <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm">
         © {currentYear} Cineflix. Todos los derechos reservados.
       </div>
-    </footer>
+    </motion.footer>
   );
 }

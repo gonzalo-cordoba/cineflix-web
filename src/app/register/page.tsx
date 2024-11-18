@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <div className="min-h-screen grid md:grid-cols-2">
-      <WelcomeCard title="Crea tu nueva cuenta Club Cineflix" />
+      <WelcomeCard title="Crea tu nueva cuenta" />
 
       <RegisterOptions />
     </div>
