@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.webp";
-import { PersonIcon } from "@primer/octicons-react";
 import { ActiveLink } from "../active-link/ActiveLink";
 import * as motion from "framer-motion/client";
+import UserInformation from "./UserInformation";
 
 const navItems = [
   { path: "/movies", text: "Peliculas" },
@@ -30,10 +30,7 @@ const Navbar = () => {
         <Image src={logo} alt="logo-cineflix" width={60} height={60} priority />
       </Link>
 
-      <div className="flex-1"></div>
-      <Link href="/login">
-        <PersonIcon className="text-white" size={24} />
-      </Link>
+      <UserInformation />
     </motion.nav>
   );
 };
