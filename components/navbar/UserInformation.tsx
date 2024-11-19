@@ -25,7 +25,7 @@ export default function UserInformation() {
           </span>
           <button
             onClick={() => signOut()}
-            className="text-white text-sm bg-red-600 hover:bg-red-700 px-3 py-1 rounded"
+            className="text-white text-sm bg-[#c77dff] hover:bg-[#9d4edd] px-3 py-1 rounded"
           >
             Cerrar sesión
           </button>
