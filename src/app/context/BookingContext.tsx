@@ -7,10 +7,12 @@ type BookingContextType = {
   selectedDate: string;
   selectedTime: string;
   selectedCinema: string;
+  currentStep: string;
   setSelectedMovie: (movie: string) => void;
   setSelectedDate: (date: string) => void;
   setSelectedTime: (time: string) => void;
   setSelectedCinema: (cinema: string) => void;
+  setCurrentStep: (step: string) => void;
 };
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -20,6 +22,7 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedCinema, setSelectedCinema] = useState("Alto Palermo Shopping");
+  const [currentStep, setCurrentStep] = useState("schedule");
 
   return (
     <BookingContext.Provider
@@ -28,10 +31,12 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
         selectedDate,
         selectedTime,
         selectedCinema,
+        currentStep,
         setSelectedMovie,
         setSelectedDate,
         setSelectedTime,
         setSelectedCinema,
+        setCurrentStep,
       }}
     >
       {children}

@@ -1,9 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import { CalendarDays, Clock, MapPin, AlertCircle } from "lucide-react";
 import { useBooking } from "@/src/app/context";
-import { CalendarDays, Clock, MapPin } from "lucide-react";
 
 export default function BookingSummary() {
-  const { selectedMovie, selectedDate, selectedTime, selectedCinema } =
-    useBooking();
+  const {
+    selectedMovie,
+    selectedDate,
+    selectedTime,
+    selectedCinema,
+    currentStep,
+    setCurrentStep,
+  } = useBooking();
+  const [showWarning, setShowWarning] = useState(false);
+
+  const handleContinue = () => {
+    if (currentStep === "schedule") {
+      if (selectedDate && selectedTime) {
+        setCurrentStep("seats");
+        setShowWarning(false);
+      } else {
+        setShowWarning(true);
+      }
+    }
+    // TODO: Agregar más lógica para los siguientes pasos (por ejemplo, ir a la página de pago)
+  };
 
   return (
     <div className="bg-gray-50 p-6 rounded-lg space-y-4">
@@ -35,9 +57,35 @@ export default function BookingSummary() {
         </div>
       </div>
 
-      <button className="w-full bg-[#9667E0] text-white py-3 rounded-lg font-semibold hover:bg-[#8557c7] transition-colors duration-200">
-        Continuar
-      </button>
+      {showWarning && (
+        <div
+          className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
+          role="alert"
+        >
+          <div className="flex">
+            <div className="py-1">
+              <AlertCircle className="h-6 w-6 text-yellow-500 mr-4" />
+            </div>
+            <div>
+              <p className="font-bold">Atención</p>
+              <p>
+                Por favor, selecciona una fecha y un horario antes de continuar.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {currentStep !== "seats" && (
+        <button
+          className="w-full bg-[#9667E0] text-white py-3 rounded-lg font-semibold hover:bg-[#8557c7] transition-colors duration-200"
+          onClick={handleContinue}
+        >
+          {currentStep === "schedule"
+            ? "Continuar a selección de asientos"
+            : "Continuar"}
+        </button>
+      )}
     </div>
   );
 }

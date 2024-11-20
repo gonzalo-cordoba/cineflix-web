@@ -1,20 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { MapPin } from "lucide-react";
 import {
   BookingSummary,
   DateSelector,
   SeatSelector,
   TimeSelector,
 } from "@/components/horarios";
-import { BookingProvider } from "../../context";
+import { BookingProvider, useBooking } from "../../context";
 
-export default function HorariosPage() {
-  const [selectedDate, setSelectedDate] = useState("2024-11-15");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [selectedCinema, setSelectedCinema] = useState("Alto Palermo Shopping");
-  const [currentStep, setCurrentStep] = useState("schedule");
+function BookingContent() {
+  const { currentStep, setCurrentStep } = useBooking();
 
   const dates = [
     { date: "2024-11-15", day: "Hoy" },
@@ -38,54 +33,58 @@ export default function HorariosPage() {
   ];
 
   return (
-    <BookingProvider>
-      <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-            <div className="bg-[#9667E0] text-white p-6">
-              <h1 className="text-3xl font-bold text-center">
-                Reserva tu película
-              </h1>
-            </div>
+    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white shadow-xl rounded-lg overflow-hidden">
+          <div className="bg-[#9667E0] text-white p-6">
+            <h1 className="text-3xl font-bold text-center">
+              Reserva tu película
+            </h1>
+          </div>
 
-            <div className="flex justify-center p-4 bg-gray-50 border-b border-gray-200">
-              <button
-                className={`px-4 py-2 mx-2 rounded-lg ${
-                  currentStep === "schedule"
-                    ? "bg-[#9667E0] text-white"
-                    : "bg-white text-gray-700"
-                }`}
-                onClick={() => setCurrentStep("schedule")}
-              >
-                Horarios
-              </button>
-              <button
-                className={`px-4 py-2 mx-2 rounded-lg ${
-                  currentStep === "seats"
-                    ? "bg-[#9667E0] text-white"
-                    : "bg-white text-gray-700"
-                }`}
-                onClick={() => setCurrentStep("seats")}
-              >
-                Asientos
-              </button>
-            </div>
+          <div className="flex justify-center p-4 bg-gray-50 border-b border-gray-200">
+            <button
+              className={`px-4 py-2 mx-2 rounded-lg ${
+                currentStep === "schedule"
+                  ? "bg-[#9667E0] text-white"
+                  : "bg-white text-gray-700"
+              }`}
+              onClick={() => setCurrentStep("schedule")}
+            >
+              Horarios
+            </button>
+            <button
+              className={`px-4 py-2 mx-2 rounded-lg ${
+                currentStep === "seats"
+                  ? "bg-[#9667E0] text-white"
+                  : "bg-white text-gray-700"
+              }`}
+              onClick={() => setCurrentStep("seats")}
+            >
+              Asientos
+            </button>
+          </div>
 
-            <div className="p-6 space-y-6">
-              {currentStep === "schedule" && (
-                <>
-                  <DateSelector dates={dates} />
-                  <TimeSelector showtimes={showtimes} />
-                </>
-              )}
-              {currentStep === "seats" && (
-                <SeatSelector /> //TODO: Aca va el componente de eleccion de asientos
-              )}
-              <BookingSummary />
-            </div>
+          <div className="p-6 space-y-6">
+            {currentStep === "schedule" && (
+              <>
+                <DateSelector dates={dates} />
+                <TimeSelector showtimes={showtimes} />
+              </>
+            )}
+            {currentStep === "seats" && <SeatSelector />}
+            <BookingSummary />
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export default function MovieBooking() {
+  return (
+    <BookingProvider>
+      <BookingContent />
     </BookingProvider>
   );
 }
