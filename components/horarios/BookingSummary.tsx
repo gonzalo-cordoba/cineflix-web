@@ -1,28 +1,28 @@
-import { CalendarDays, Clock } from "lucide-react";
+import { useBooking } from "@/src/app/context";
+import { CalendarDays, Clock, MapPin } from "lucide-react";
 
-type BookingSummaryProps = {
-  selectedDate: string;
-  selectedTime: string;
-  selectedCinema: string;
-};
+export default function BookingSummary() {
+  const { selectedMovie, selectedDate, selectedTime, selectedCinema } =
+    useBooking();
 
-export default function BookingSummary({
-  selectedDate,
-  selectedCinema,
-  selectedTime,
-}: BookingSummaryProps) {
   return (
     <div className="bg-gray-50 p-6 rounded-lg space-y-4">
       <h2 className="text-xl font-bold text-gray-800">Resumen de tu reserva</h2>
-      <div className="space-y-2">
-        <h3 className="font-semibold text-lg text-gray-800">Gladiator II</h3>
+      <div className="space-y-3">
+        <h3 className="font-semibold text-lg text-gray-800">{selectedMovie}</h3>
         <div className="flex items-center space-x-2 text-sm text-gray-600">
-          <CalendarDays className="h-4 w-4" />
-          <span>{selectedDate}</span>
+          <MapPin className="h-4 w-4 text-[#9667E0]" />
+          <span>{selectedCinema}</span>
         </div>
+        {selectedDate && (
+          <div className="flex items-center space-x-2 text-sm text-gray-600">
+            <CalendarDays className="h-4 w-4 text-[#9667E0]" />
+            <span>{selectedDate}</span>
+          </div>
+        )}
         {selectedTime && (
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <Clock className="h-4 w-4" />
+            <Clock className="h-4 w-4 text-[#9667E0]" />
             <span>{selectedTime}</span>
           </div>
         )}
