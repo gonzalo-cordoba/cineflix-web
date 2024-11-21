@@ -3,6 +3,7 @@
 import {
   BookingSummary,
   DateSelector,
+  PaymentSection,
   SeatSelector,
   TimeSelector,
 } from "@/components/horarios";
@@ -63,6 +64,16 @@ function BookingContent() {
             >
               Asientos
             </button>
+            <button
+              className={`px-4 py-2 mx-2 rounded-lg ${
+                currentStep === "payment"
+                  ? "bg-[#9667E0] text-white"
+                  : "bg-white text-gray-700"
+              }`}
+              onClick={() => setCurrentStep("payment")}
+            >
+              Pago
+            </button>
           </div>
 
           <div className="p-6 space-y-6">
@@ -73,6 +84,8 @@ function BookingContent() {
               </>
             )}
             {currentStep === "seats" && <SeatSelector />}
+            {currentStep === "payment" && <PaymentSection />}
+
             <BookingSummary />
           </div>
         </div>

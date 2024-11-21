@@ -10,6 +10,7 @@ export default function BookingSummary() {
     selectedDate,
     selectedTime,
     selectedCinema,
+    selectedSeats,
     currentStep,
     setCurrentStep,
   } = useBooking();
@@ -48,12 +49,20 @@ export default function BookingSummary() {
             <span>{selectedTime}</span>
           </div>
         )}
+        {selectedSeats.length > 0 && (
+          <div className="flex items-center space-x-2 text-sm text-gray-600">
+            <span className="font-semibold">Asientos:</span>
+            <span>{selectedSeats.join(", ")}</span>
+          </div>
+        )}
       </div>
 
       <div className="pt-4 border-t border-gray-200">
         <div className="flex justify-between items-center">
           <span className="font-semibold text-gray-600">Total:</span>
-          <span className="text-2xl font-bold text-[#9667E0]">$0.00</span>
+          <span className="text-2xl font-bold text-[#9667E0]">
+            ${selectedSeats.length * 10}
+          </span>
         </div>
       </div>
 
@@ -76,14 +85,12 @@ export default function BookingSummary() {
         </div>
       )}
 
-      {currentStep !== "seats" && (
+      {currentStep !== "seats" && currentStep !== "payment" && (
         <button
           className="w-full bg-[#9667E0] text-white py-3 rounded-lg font-semibold hover:bg-[#8557c7] transition-colors duration-200"
           onClick={handleContinue}
         >
-          {currentStep === "schedule"
-            ? "Continuar a selección de asientos"
-            : "Continuar"}
+          Continuar a selección de asientos
         </button>
       )}
     </div>

@@ -11,8 +11,14 @@ type Seat = {
 };
 
 export default function SeatSelector() {
-  const { selectedMovie, selectedDate, selectedTime } = useBooking();
-  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+  const {
+    selectedMovie,
+    selectedDate,
+    selectedTime,
+    selectedSeats,
+    setSelectedSeats,
+    setCurrentStep,
+  } = useBooking();
   const [showWarning, setShowWarning] = useState(false);
 
   const rows = Array.from("ABCDEFGHIJK");
@@ -32,9 +38,9 @@ export default function SeatSelector() {
   };
 
   const handleSeatClick = (seatId: string) => {
-    setSelectedSeats((prev) => {
+    setSelectedSeats((prev: string[]) => {
       if (prev.includes(seatId)) {
-        return prev.filter((id) => id !== seatId);
+        return prev.filter((id: string) => id !== seatId);
       }
       return [...prev, seatId];
     });
@@ -45,7 +51,7 @@ export default function SeatSelector() {
     if (selectedSeats.length === 0) {
       setShowWarning(true);
     } else {
-      // Procedo al pago
+      setCurrentStep("payment");
       setShowWarning(false);
     }
   };

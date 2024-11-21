@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/ui/footer/Footer";
 import { AuthProvider } from "./auth";
+import { Toaster } from "react-hot-toast";
 
 const inter = Montserrat({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <AuthProvider>
           <Navbar />
           <main>{children}</main>
+          <Toaster position="top-center" />
           <Footer />
         </AuthProvider>
       </body>
