@@ -13,6 +13,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useBookingStore } from "@/src/store/store";
 import Cookies from "js-cookie";
 
+// TODO!: Refactorizar este codigo!!!!
+
 function BookingContent() {
   const { currentStep, setCurrentStep, setSelectedMovie } = useBooking();
   const searchParams = useSearchParams();

@@ -25,7 +25,6 @@ export default function BookingSummary() {
         setShowWarning(true);
       }
     }
-    // TODO: Agregar más lógica para los siguientes pasos (por ejemplo, ir a la página de pago)
   };
 
   return (
