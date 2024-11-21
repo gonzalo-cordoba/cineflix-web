@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect } from "react";
 import {
   BookingSummary,
   DateSelector,
@@ -8,17 +9,25 @@ import {
   TimeSelector,
 } from "@/components/horarios";
 import { BookingProvider, useBooking } from "../../context";
-import { useSearchParams } from "next/navigation";
-import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useBookingStore } from "@/src/store/store";
+import Cookies from "js-cookie";
 
 function BookingContent() {
   const { currentStep, setCurrentStep, setSelectedMovie } = useBooking();
   const searchParams = useSearchParams();
   const movieTitle = searchParams.get("movie") || "Pelicula seleccionada";
+  const router = useRouter();
+  const canAccessBooking = useBookingStore((state) => state.canAccessBooking);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSelectedMovie(movieTitle);
-  }, [movieTitle, setSelectedMovie]);
+
+    const cookieAccess = Cookies.get("canAccessBooking");
+    if (!canAccessBooking && !cookieAccess) {
+      router.push("/");
+    }
+  }, [movieTitle, setSelectedMovie, canAccessBooking, router]);
 
   const dates = [
     { date: "2024-11-15", day: "Hoy" },
