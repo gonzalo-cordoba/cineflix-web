@@ -8,9 +8,17 @@ import {
   TimeSelector,
 } from "@/components/horarios";
 import { BookingProvider, useBooking } from "../../context";
+import { useSearchParams } from "next/navigation";
+import React from "react";
 
 function BookingContent() {
-  const { currentStep, setCurrentStep } = useBooking();
+  const { currentStep, setCurrentStep, setSelectedMovie } = useBooking();
+  const searchParams = useSearchParams();
+  const movieTitle = searchParams.get("movie") || "Pelicula seleccionada";
+
+  React.useEffect(() => {
+    setSelectedMovie(movieTitle);
+  }, [movieTitle, setSelectedMovie]);
 
   const dates = [
     { date: "2024-11-15", day: "Hoy" },
@@ -41,6 +49,9 @@ function BookingContent() {
             <h1 className="text-3xl font-bold text-center">
               Reserva tu película
             </h1>
+            <h2 className="text-xl font-semibold text-center mt-2">
+              {movieTitle}
+            </h2>
           </div>
 
           <div className="flex justify-center p-4 bg-gray-50 border-b border-gray-200">

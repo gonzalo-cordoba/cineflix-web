@@ -20,7 +20,7 @@ type BookingContextType = {
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
 
 export function BookingProvider({ children }: { children: React.ReactNode }) {
-  const [selectedMovie, setSelectedMovie] = useState("Gladiator II");
+  const [selectedMovie, setSelectedMovie] = useState("Pelicula seleccionada");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedCinema, setSelectedCinema] = useState("Alto Palermo Shopping");
