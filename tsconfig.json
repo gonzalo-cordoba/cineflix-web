@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": ["react-hook-form"],
     "plugins": [
       {
         "name": "next"
