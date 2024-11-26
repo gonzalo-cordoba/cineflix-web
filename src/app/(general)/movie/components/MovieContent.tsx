@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 
 interface MovieContentProps {
   movieId: string;
-  movie: MovieResult;
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -42,12 +41,6 @@ export default function MovieContent({ movieId }: MovieContentProps) {
 
   if (!movie) return <p>Cargando...</p>;
 
-  const handleBuyTickets = () => {
-    setCanAccessBooking(true);
-    Cookies.set("canAccessBooking", "true", { expires: 1 / 24 }); //TODO: Expira en una hora
-    router.push(`/horario?movie=${encodeURIComponent(movie.title)}`);
-  };
-
   return (
     <div className="relative z-10 max-w-2xl w-full bg-black/70 p-8 rounded-lg text-white space-y-6">
       <Image
@@ -63,7 +56,7 @@ export default function MovieContent({ movieId }: MovieContentProps) {
       </div>
       <p className="text-sm leading-relaxed">{movie.overview}</p>
       <div className="flex gap-4">
-        <ButtonViolet onClick={handleBuyTickets} text="Comprar boletos" />
+        <ButtonViolet text="Comprar boletos" />
 
         <TrailerModal movieId={movieId} />
       </div>
