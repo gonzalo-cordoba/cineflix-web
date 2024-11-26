@@ -11,6 +11,9 @@ const inter = Montserrat({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Cineflix",
   description: "Las mejores peliculas para vos!",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
