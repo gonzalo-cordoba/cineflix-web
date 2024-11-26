@@ -1,20 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import style from "./ActiveLink.module.css";
 import { usePathname } from "next/navigation";
 
 interface Props {
   path: string;
   text: string;
+  className?: string;
 }
 
-export const ActiveLink = ({ path, text }: Props) => {
+export const ActiveLink = ({ path, text, className = "" }: Props) => {
   const pathname = usePathname();
+  const isActive = pathname === path;
 
   return (
     <Link
-      className={`${style.link} ${pathname === path && style["active-link"]}`}
+      className={`${className} ${
+        isActive ? "text-white font-bold" : "text-purple-200"
+      } hover:text-white transition-colors duration-200`}
       href={path}
     >
       {text}
