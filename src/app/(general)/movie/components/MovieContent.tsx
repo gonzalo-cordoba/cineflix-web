@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import TrailerModal from "../components/TrailerModal";
 import ButtonViolet from "@/components/ui/button-violet/ButtonViolet";
-import { Movie } from "@/src/movies";
+import { Movie, MovieResult } from "@/src/movies";
+import Link from "next/link";
+import { useBookingStore } from "@/src/store/store";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 interface MovieContentProps {
   movieId: string;
+  movie: MovieResult;
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -22,6 +27,11 @@ const getMovie = async (id: string): Promise<Movie> => {
 export default function MovieContent({ movieId }: MovieContentProps) {
   const [movie, setMovie] = useState<Movie | null>(null);
 
+  const router = useRouter();
+  const setCanAccessBooking = useBookingStore(
+    (state) => state.setCanAccessBooking
+  );
+
   useEffect(() => {
     const fetchMovie = async () => {
       const movieData = await getMovie(movieId);
@@ -31,6 +41,12 @@ export default function MovieContent({ movieId }: MovieContentProps) {
   }, [movieId]);
 
   if (!movie) return <p>Cargando...</p>;
+
+  const handleBuyTickets = () => {
+    setCanAccessBooking(true);
+    Cookies.set("canAccessBooking", "true", { expires: 1 / 24 }); //TODO: Expira en una hora
+    router.push(`/horario?movie=${encodeURIComponent(movie.title)}`);
+  };
 
   return (
     <div className="relative z-10 max-w-2xl w-full bg-black/70 p-8 rounded-lg text-white space-y-6">
@@ -47,7 +63,8 @@ export default function MovieContent({ movieId }: MovieContentProps) {
       </div>
       <p className="text-sm leading-relaxed">{movie.overview}</p>
       <div className="flex gap-4">
-        <ButtonViolet text="Comprar boletos" />
+        <ButtonViolet onClick={handleBuyTickets} text="Comprar boletos" />
+
         <TrailerModal movieId={movieId} />
       </div>
     </div>
