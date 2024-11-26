@@ -7,3 +7,4 @@ export * from "./map-embed/MapEmbed";
 
 export * from "./ui/button-violet/ButtonViolet";
 export * from "./ui/footer/Footer";
+export * from "./navbar/MobileMenu";

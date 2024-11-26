@@ -1,37 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.webp";
-import { ActiveLink } from "../active-link/ActiveLink";
-import * as motion from "framer-motion/client";
 import UserInformation from "./UserInformation";
+import { ActiveLink } from "../active-link/ActiveLink";
+import MobileMenu from "./MobileMenu";
 
-const navItems = [
-  { path: "/movies", text: "Peliculas" },
+export const navItems = [
+  { path: "/movies", text: "Movies" },
   { path: "/candy", text: "Candy" },
-  { path: "/contact", text: "Contacto" },
+  { path: "/contact", text: "Contact" },
 ];
+
 const Navbar = () => {
   return (
-    <motion.nav
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="flex items-center justify-between bg-[#9667E0] p-5 rounded"
-    >
-      <div className="flex space-x-4 text-white">
-        {navItems.map((navItems) => (
-          <ActiveLink key={navItems.path} {...navItems} />
-        ))}
-      </div>
+    <div className="relative">
+      <nav className="bg-[#9667E0] p-5 rounded">
+        <div className="container mx-auto flex items-center justify-between">
+          <Link href={"/"}>
+            <Image
+              src={logo}
+              alt="logo-cineflix"
+              width={60}
+              height={60}
+              priority
+            />
+          </Link>
 
-      <div className="flex-1"></div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-4">
+            {navItems.map((item) => (
+              <ActiveLink key={item.path} {...item} />
+            ))}
+          </div>
 
-      <Link href={"/"} className="absolute left-1/2 transform -translate-x-1/2">
-        <Image src={logo} alt="logo-cineflix" width={60} height={60} priority />
-      </Link>
+          <MobileMenu />
 
-      <UserInformation />
-    </motion.nav>
+          <div className="hidden md:block">
+            <UserInformation />
+          </div>
+        </div>
+      </nav>
+    </div>
   );
 };
 
