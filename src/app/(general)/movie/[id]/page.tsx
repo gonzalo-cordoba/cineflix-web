@@ -1,8 +1,9 @@
 import MovieContent from "../components/MovieContent";
 import { Metadata } from "next";
 
-interface Props {
+interface MoviePageProps {
   params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -15,7 +16,9 @@ const getMovie = async (id: string) => {
   return movie;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: MoviePageProps): Promise<Metadata> {
   try {
     const { id } = params;
     const movie = await getMovie(id);
@@ -32,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function MoviePage({ params }: Props) {
+export default async function MoviePage({ params }: MoviePageProps) {
   const { id } = params;
   const movie = await getMovie(id);
   const backgroundUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
