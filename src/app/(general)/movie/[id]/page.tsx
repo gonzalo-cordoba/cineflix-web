@@ -1,10 +1,14 @@
 import MovieContent from "../components/MovieContent";
 import { Metadata } from "next";
 
-interface MoviePageProps {
-  params: { id: string };
+type MovieParams = {
+  id: string;
+};
+
+type Props = {
+  params: MovieParams;
   searchParams: { [key: string]: string | string[] | undefined };
-}
+};
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -16,12 +20,9 @@ const getMovie = async (id: string) => {
   return movie;
 };
 
-export async function generateMetadata({
-  params,
-}: MoviePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const { id } = params;
-    const movie = await getMovie(id);
+    const movie = await getMovie(params.id);
 
     return {
       title: movie.title,
@@ -35,9 +36,8 @@ export async function generateMetadata({
   }
 }
 
-export default async function MoviePage({ params }: MoviePageProps) {
-  const { id } = params;
-  const movie = await getMovie(id);
+export default async function MoviePage({ params }: Props) {
+  const movie = await getMovie(params.id);
   const backgroundUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
 
   return (
@@ -51,7 +51,7 @@ export default async function MoviePage({ params }: MoviePageProps) {
       }}
     >
       <div className="absolute inset-0 backdrop-blur-sm bg-black/30 -z-10" />
-      <MovieContent movieId={id} />
+      <MovieContent movieId={params.id} />
     </div>
   );
 }
