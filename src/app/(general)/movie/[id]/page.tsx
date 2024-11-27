@@ -1,12 +1,12 @@
 import MovieContent from "../components/MovieContent";
 import { Metadata } from "next";
 
-type MovieParams = {
+type Params = {
   id: string;
 };
 
 type Props = {
-  params: MovieParams;
+  params: Params;
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
