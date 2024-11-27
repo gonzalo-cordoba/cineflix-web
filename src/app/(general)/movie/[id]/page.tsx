@@ -21,13 +21,13 @@ async function getMovie(id: string) {
   return res.json();
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const movie = await getMovie(params.id);
-  return {
-    title: movie.title,
-    description: `Página de ${movie.title}`,
-  };
-}
+// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+//   const movie = await getMovie(params.id);
+//   return {
+//     title: movie.title,
+//     description: `Página de ${movie.title}`,
+//   };
+// }
 
 export default async function MoviePage({ params }: Props) {
   const movie = await getMovie(params.id);
