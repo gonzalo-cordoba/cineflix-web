@@ -12,28 +12,21 @@ type Props = {
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-const getMovie = async (id: string) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-AR&region=AR`
+async function getMovie(id: string) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-AR&region=AR`,
+    { next: { revalidate: 3600 } }
   );
-  const movie = await response.json();
-  return movie;
-};
+  if (!res.ok) throw new Error("Failed to fetch movie");
+  return res.json();
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  try {
-    const movie = await getMovie(params.id);
-
-    return {
-      title: movie.title,
-      description: `Página de ${movie.title}`,
-    };
-  } catch (error) {
-    return {
-      title: "Cineflix",
-      description: "¡Vivi la mejor experiencia en Cineflix!",
-    };
-  }
+  const movie = await getMovie(params.id);
+  return {
+    title: movie.title,
+    description: `Página de ${movie.title}`,
+  };
 }
 
 export default async function MoviePage({ params }: Props) {
@@ -47,7 +40,6 @@ export default async function MoviePage({ params }: Props) {
         backgroundImage: `url(${backgroundUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backdropFilter: "blur(10px)",
       }}
     >
       <div className="absolute inset-0 backdrop-blur-sm bg-black/30 -z-10" />
