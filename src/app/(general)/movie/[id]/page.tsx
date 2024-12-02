@@ -1,14 +1,12 @@
 import MovieContent from "../components/MovieContent";
 import { Metadata } from "next";
 
-type Params = {
-  id: string;
-};
-
-type Props = {
-  params: Params;
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+interface Props {
+  params: {
+    id: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -21,6 +19,7 @@ async function getMovie(id: string) {
   return res.json();
 }
 
+// Puedes descomentar esta función si necesitas generar metadatos dinámicos
 // export async function generateMetadata({ params }: Props): Promise<Metadata> {
 //   const movie = await getMovie(params.id);
 //   return {
