@@ -1,5 +1,4 @@
 import MovieContent from "../components/MovieContent";
-import { Metadata } from "next";
 
 interface PageProps {
   params: {
