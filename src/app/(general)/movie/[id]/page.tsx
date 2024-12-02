@@ -1,11 +1,9 @@
 import MovieContent from "../components/MovieContent";
-import { Metadata } from "next";
 
-interface Props {
+interface PageProps {
   params: {
     id: string;
   };
-  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -19,8 +17,8 @@ async function getMovie(id: string) {
   return res.json();
 }
 
-// Puedes descomentar esta función si necesitas generar metadatos dinámicos
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+// Si necesitas metadatos dinámicos
+// export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 //   const movie = await getMovie(params.id);
 //   return {
 //     title: movie.title,
@@ -28,7 +26,7 @@ async function getMovie(id: string) {
 //   };
 // }
 
-export default async function MoviePage({ params }: Props) {
+export default async function MoviePage({ params }: PageProps) {
   const movie = await getMovie(params.id);
   const backgroundUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
 
