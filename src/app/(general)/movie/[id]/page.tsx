@@ -1,11 +1,5 @@
 import MovieContent from "../components/MovieContent";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 async function getMovie(id: string) {
@@ -17,16 +11,11 @@ async function getMovie(id: string) {
   return res.json();
 }
 
-// Si necesitas metadatos dinámicos
-// export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-//   const movie = await getMovie(params.id);
-//   return {
-//     title: movie.title,
-//     description: `Página de ${movie.title}`,
-//   };
-// }
-
-export default async function MoviePage({ params }: PageProps) {
+export default async function MoviePage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const movie = await getMovie(params.id);
   const backgroundUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
 
